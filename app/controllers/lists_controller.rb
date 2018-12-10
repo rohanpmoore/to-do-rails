@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   def index
     @lists = List.all
+    @not_done_tasks = Task.not_done
   end
 
   def show

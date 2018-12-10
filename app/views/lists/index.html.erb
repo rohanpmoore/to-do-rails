@@ -1,8 +1,20 @@
 <h1>Lists</h1>
 
+
+<h3>Lists</h3>
 <ul>
   <% @lists.each do |list| %>
     <li><%= link_to list.name, list_path(list) %></li>
+  <% end %>
+</ul>
+
+<h3>Incomplete Tasks</h3>
+<ul>
+  <% @not_done_tasks.each do |task| %>
+    <li>
+      "<%= task.description %>" from
+      "<%= List.find(task.list_id).name %>"
+    </li>
   <% end %>
 </ul>
 
