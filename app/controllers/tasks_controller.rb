@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.new
   end
-  
+
   def create
     @list = List.find(params[:list_id])
     @task = @list.tasks.new(task_params)
@@ -12,6 +12,29 @@ class TasksController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+    if @task.update(task_params)
+      redirect_to list_path(@list)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+    @task.destroy
+    redirect_to list_path(@list)
   end
 
 private
